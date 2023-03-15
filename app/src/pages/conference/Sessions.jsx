@@ -2,6 +2,41 @@ import React, {useState} from "react";
 import "./style-sessions.css";
 import { Link } from "react-router-dom"
 import { Formik, Field, Form } from "formik"
+import { gql, useQuery } from "@apollo/client"
+
+// Define query
+const SESSIONS = gql`
+  query sessions($day: String!) {
+    sessions(day: $day) {
+      id
+      titles
+      day
+      room
+      level
+    }
+  }
+`;
+
+const SessionList = ({ day }) => {
+  
+  if (day == "") day="Wednesday"
+  
+  // execute query & store response json
+  const { loading, error, data } = useQuery(SESSIONS, {
+    variables: { day }
+  })
+  
+  if (loading) return <p>Loading sessions...</p>
+  
+  if (error) return <p>Error loading sessions!</p>
+
+  return data?.sessions.map(session => (
+    <SessionItem
+      key={session.id}
+      session={{...session}}
+    />
+  ))
+}
 
 /* ---> Define queries, mutations and fragments here */
 
@@ -10,24 +45,20 @@ function AllSessionList() {
    return <SessionItem />
 }
 
-function SessionList () {
-  /* ---> Invoke useQuery hook here to retrieve sessions per day and call SessionItem */
-  return <SessionItem />
-}
-
-function SessionItem() {
+function SessionItem({ session }) {
+  const { id, title, day, room, level } = session
 
   /* ---> Replace hard coded session values with data that you get back from GraphQL server here */
   return (
     <div key={'id'} className="col-xs-12 col-sm-6" style={{ padding: 5 }}>
       <div className="panel panel-default">
         <div className="panel-heading">
-          <h3 className="panel-title">{"title"}</h3>
-          <h5>{`Level: `}</h5>
+          <h3 className="panel-title">{title}</h3>
+          <h5>{`Level: ${level}`}</h5>
         </div>
         <div className="panel-body">
-          <h5>{`Day: `}</h5>
-          <h5>{`Room Number: `}</h5>
+          <h5>{`Day: ${day}`}</h5>
+          <h5>{`Room Number: ${room}`}</h5>
           <h5>{`Starts at: `}</h5>
         </div>
         <div className="panel-footer">
@@ -66,8 +97,7 @@ export function Sessions() {
               Friday
             </button >
           </div>
-          { day !== 'All' && <SessionList day={day} />}
-          { day === 'All' && <AllSessionList /> }
+          { day === 'All' ? <AllSessionList /> : <SessionList day={day} /> }
         </div>
       </section>
     </>

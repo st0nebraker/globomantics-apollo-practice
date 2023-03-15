@@ -1,14 +1,36 @@
 import * as React from "react";
 import "./style-sessions.css";
+import { gql, useQuery } from "@apollo/client";
+
+// define query
+const SPEAKERS = gql`
+  query speakers {
+    speakers {
+      id
+      name
+      bio
+      sessions {
+        id
+        title
+      }
+    }
+  }
+`;
 
 /* ---> Define queries, mutations and fragments here */
 
 const SpeakerList = () => {
 
+  // execute query
+  const { loading, error, data } = useQuery(SPEAKERS);
+  
+  if (loading) return <p>Loading speakers...</p>
+  if (error) return <p>Error loading speakers!</p>
+  
   /* ---> Replace hardcoded speaker values with data that you get back from GraphQL server here */
   const featured = false;
 
-  return (
+  return data.speakers.map(({ id, name, bio, sessions }) => (
 		<div
       key={'id'}
       className="col-xs-12 col-sm-6 col-md-6"
@@ -16,16 +38,18 @@ const SpeakerList = () => {
     >
       <div className="panel panel-default">
         <div className="panel-heading">
-          <h3 className="panel-title">{'Speaker: '}</h3>
+          <h3 className="panel-title">{'Speaker: '+ name}</h3>
         </div>
         <div className="panel-body">
-          <h5>{'Bio: ' }</h5>
+          <h5>{'Bio: '+ bio }</h5>
         </div>
         <div className="panel-footer">
           <h4>Sessions</h4>
-					{
-						/* ---> Loop through speaker's sessions here */
-					}
+					{sessions.map(session => (
+            <span key={session.id} style={{ padding: 2 }}>
+              <p>{session.title}</p>
+            </span>
+          ))}
           <span>	
             <button	
               type="button"	
@@ -47,7 +71,7 @@ const SpeakerList = () => {
         </div>
       </div>
     </div>
-	);
+  ))
 };
 
 const SpeakerDetails = () => {

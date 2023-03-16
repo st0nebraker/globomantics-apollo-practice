@@ -48,7 +48,8 @@
           "name": "Rapid Cross-Platform AR Development with React Native"
         }
       ],
-      "name": "Xoan Chapman"
+      "name": "Xoan Chapman",
+      "featured": true
     },
     {
       "id": "223d2b9d-a582-4e14-bebb-d636fb030bda",
@@ -59,7 +60,8 @@
           "name": "Getting your head around .NET Standard 2.1"
         }
       ],
-      "name": "Reed Watts"
+      "name": "Reed Watts",
+      "featured": true
     },
     {
       "id": "0a8d8acd-7224-4746-8cb6-5eeee2626bf4",
@@ -70,7 +72,8 @@
           "name": "Building a QA practice from scratch"
         }
       ],
-      "name": "Ripley Vargas"
+      "name": "Ripley Vargas",
+      "featured": true
     },
     {
       "id": "e8eb22dd-d167-4efa-ba0e-905c94b38f9b",
@@ -85,7 +88,8 @@
           "name": "Team Work Makes the Dream Work"
         }
       ],
-      "name": "Constance Jimenez"
+      "name": "Constance Jimenez",
+      "featured": true
     },
     {
       "id": "bc6182e1-400e-41c6-aedc-a4a66c5dc236",
@@ -140,7 +144,8 @@
           "name": "User Experience Pitfalls"
         }
       ],
-      "name": "Greg Pierce"
+      "name": "Greg Pierce",
+      "featured": true
     },
     {
       "id": "66c1e054-83a5-487a-aef3-0d8499f07c6f",
@@ -298,7 +303,8 @@
           "name": "Microservices Hands-on with MicroProfile"
         }
       ],
-      "name": "Kurt Anderson"
+      "name": "Kurt Anderson",
+      "featured": true
     },
     {
       "id": "76842364-2733-4aea-a940-7c81195e5120",
@@ -320,7 +326,8 @@
           "name": "Building Event Driven (Micro) Services"
         }
       ],
-      "name": "Camryn Richardson"
+      "name": "Camryn Richardson",
+      "featured": true
     },
     {
       "id": "730a789f-e2a8-483d-91bc-6e794f1b44d5",
@@ -331,7 +338,8 @@
           "name": "Focusing on Focus"
         }
       ],
-      "name": "Ray Lucas"
+      "name": "Ray Lucas",
+      "featured": true
     },
     {
       "id": "239cf374-ad4d-4877-a5e5-951cb4cd9291",

@@ -3630,6 +3630,34 @@
       "level": "Intermediate",
       "day": "Thursday",
       "id": "814b1f5e-e6df-440b-a91c-df198b5bbed2"
+    },
+    {
+      "title": "My new session",
+      "description": "This is a great session",
+      "level": "Intermediate",
+      "day": "Friday",
+      "id": "5d8fc35c-8a4e-4e76-8922-ef61c0d208d5"
+    },
+    {
+      "title": "Brand new session",
+      "description": "session rocks",
+      "level": "Introductory",
+      "day": "Thurdsay",
+      "id": "468b6038-4d6b-41af-a37c-f102fc285808"
+    },
+    {
+      "title": "New new",
+      "description": "New new",
+      "level": "Advanced",
+      "day": "Thursday",
+      "id": "9d548cbc-350d-4483-bc4a-bcadabbbf1f4"
+    },
+    {
+      "title": "Testing session",
+      "description": "Testing session",
+      "level": "Introductory",
+      "day": "Wednesday",
+      "id": "515fff85-2525-4302-9c63-61200471d5a1"
     }
   ]
 }

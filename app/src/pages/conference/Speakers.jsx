@@ -1,17 +1,27 @@
 import * as React from "react";
 import "./style-sessions.css";
 import { useParams } from "react-router-dom";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useMutation } from "@apollo/client";
 
 const SPEAKER_ATTRIBUTES = gql`
   fragment SpeakerInfo on Speaker {
     id
-      name
-      bio
-      sessions {
-        id
-        title
-      }
+    name
+    bio
+    sessions {
+      id
+      title
+    }
+    featured
+  }
+`;
+
+const FEATURED_SPEAKER = gql`
+  mutation markFeatured($speakerId: ID!, $featured: Boolean!) {
+    markFeatured(speakerId: $speakerId, featured: $featured) {
+      id
+      featured
+    }
   }
 `;
 
@@ -41,15 +51,14 @@ const SpeakerList = () => {
   // execute query
   const { loading, error, data } = useQuery(SPEAKERS);
   
+  const [markFeatured] = useMutation(FEATURED_SPEAKER);
+  
   if (loading) return <p>Loading speakers...</p>
   if (error) return <p>Error loading speakers!</p>
   
-  /* ---> Replace hardcoded speaker values with data that you get back from GraphQL server here */
-  const featured = false;
-
-  return data.speakers.map(({ id, name, bio, sessions }) => (
+  return data.speakers.map(({ id: speakerId, name, bio, sessions, featured }) => (
 		<div
-      key={'id'}
+      key={speakerId}
       className="col-xs-12 col-sm-6 col-md-6"
       style={{ padding: 5 }}
     >
@@ -67,24 +76,22 @@ const SpeakerList = () => {
               <p>{session.title}</p>
             </span>
           ))}
-          <span>	
-            <button	
-              type="button"	
-              className="btn btn-default btn-lg"	
-              onClick={()=> {
-                /* ---> Call useMutation's mutate function to mark speaker as featured */
-              }}	
-              >	
-                <i	
-                  className={`fa ${featured ? "fa-star" : "fa-star-o"}`}	
-                  aria-hidden="true"	
-                  style={{	
-                    color: featured ? "gold" : undefined,	
-                  }}	
-                ></i>{" "}	
-                Featured Speaker	
-            </button>	
-          </span>
+          <button	
+            type="button"	
+            className="btn btn-default btn-lg"	
+            onClick={ async () => {
+              await markFeatured({ variables: { speakerId, featured: true } });
+            }}	
+            >	
+              <i	
+                className={`fa ${featured ? "fa-star" : "fa-star-o"}`}	
+                aria-hidden="true"	
+                style={{	
+                  color: featured ? "gold" : undefined,	
+                }}	
+              ></i>{" "}	
+              Featured Speaker	
+          </button>	
         </div>
       </div>
     </div>
